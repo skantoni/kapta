@@ -1,0 +1,449 @@
+/* ============================================================
+   KAPTA — Auth CSS (Login / Register)
+   assets/css/auth.css
+   ============================================================ */
+
+/* ── Auth Layout ────────────────────────────────────────────── */
+.auth-page {
+  min-height: 100vh;
+  background: var(--dark-bg);
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  padding: 40px 20px;
+  position: relative;
+  overflow-x: hidden;
+  overflow-y: auto;
+}
+
+/* Canvas particle background */
+#auth-canvas {
+  position: fixed;
+  inset: 0;
+  z-index: 0;
+  pointer-events: none;
+}
+
+/* Radial gradient glow in bg */
+.auth-page::before {
+  content: '';
+  position: fixed;
+  top: -20%;
+  left: 50%;
+  transform: translateX(-50%);
+  width: 800px;
+  height: 600px;
+  background: radial-gradient(ellipse, rgba(245,200,66,0.08) 0%, transparent 70%);
+  pointer-events: none;
+  z-index: 0;
+}
+
+.auth-page::after {
+  content: '';
+  position: fixed;
+  bottom: -20%;
+  right: -10%;
+  width: 600px;
+  height: 600px;
+  background: radial-gradient(ellipse, rgba(124,58,237,0.06) 0%, transparent 70%);
+  pointer-events: none;
+  z-index: 0;
+}
+
+/* ── Auth Card ──────────────────────────────────────────────── */
+.auth-card {
+  position: relative;
+  z-index: 10;
+  width: 100%;
+  max-width: 460px;
+  background: rgba(15, 15, 26, 0.85);
+  backdrop-filter: blur(30px);
+  -webkit-backdrop-filter: blur(30px);
+  border: 1px solid rgba(245, 200, 66, 0.18);
+  border-radius: 24px;
+  padding: 40px;
+  box-shadow:
+    0 0 0 1px rgba(255,255,255,0.03),
+    0 40px 80px rgba(0,0,0,0.6),
+    0 0 60px rgba(245,200,66,0.06);
+  animation: slideUp 0.5s ease forwards;
+}
+
+.auth-card-wide {
+  max-width: 600px;
+}
+
+/* ── Logo Area ──────────────────────────────────────────────── */
+.auth-logo {
+  text-align: center;
+  margin-bottom: 32px;
+}
+
+.auth-logo .logo-mark {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 64px;
+  height: 64px;
+  background: linear-gradient(135deg, rgba(245,200,66,0.2), rgba(201,162,39,0.1));
+  border: 1px solid rgba(245,200,66,0.3);
+  border-radius: 18px;
+  font-size: 1.8rem;
+  margin-bottom: 12px;
+  animation: glow 3s ease-in-out infinite;
+  position: relative;
+}
+
+.auth-logo .logo-mark::before {
+  content: '';
+  position: absolute;
+  inset: -4px;
+  border-radius: 22px;
+  background: linear-gradient(135deg, rgba(245,200,66,0.15), transparent);
+  z-index: -1;
+}
+
+.auth-logo .logo-name {
+  font-family: 'Outfit', sans-serif;
+  font-size: 2rem;
+  font-weight: 800;
+  background: linear-gradient(135deg, #F5C842, #FFE566, #C9A227);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+  display: block;
+  line-height: 1;
+  margin-bottom: 6px;
+}
+
+.auth-logo .logo-tagline {
+  font-size: 0.82rem;
+  color: var(--text-muted);
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+}
+
+/* ── Auth Title ─────────────────────────────────────────────── */
+.auth-title {
+  font-family: 'Outfit', sans-serif;
+  font-size: 1.5rem;
+  font-weight: 700;
+  text-align: center;
+  margin-bottom: 6px;
+}
+
+.auth-subtitle {
+  text-align: center;
+  font-size: 0.875rem;
+  color: var(--text-muted);
+  margin-bottom: 28px;
+}
+
+/* ── Role Selector ──────────────────────────────────────────── */
+.role-selector {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 16px;
+  margin-bottom: 32px;
+}
+
+.role-card {
+  position: relative;
+  cursor: pointer;
+}
+
+.role-card input[type="radio"] {
+  position: absolute;
+  opacity: 0;
+  width: 0;
+  height: 0;
+}
+
+.role-card label {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  padding: 28px 20px;
+  border: 2px solid var(--dark-border);
+  border-radius: 18px;
+  background: var(--dark-surface);
+  cursor: pointer;
+  transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+  text-align: center;
+  gap: 12px;
+}
+
+.role-card label:hover {
+  border-color: rgba(245,200,66,0.4);
+  background: var(--dark-elevated);
+  transform: translateY(-2px);
+}
+
+.role-card input:checked + label {
+  border-color: var(--gold-primary);
+  background: rgba(245,200,66,0.08);
+  box-shadow: 0 0 0 3px rgba(245,200,66,0.15), 0 8px 30px rgba(0,0,0,0.3);
+}
+
+.role-icon {
+  font-size: 2.2rem;
+  line-height: 1;
+}
+
+.role-name {
+  font-family: 'Outfit', sans-serif;
+  font-size: 1rem;
+  font-weight: 700;
+  color: var(--text-primary);
+}
+
+.role-desc {
+  font-size: 0.78rem;
+  color: var(--text-muted);
+  line-height: 1.4;
+}
+
+.role-card input:checked + label .role-name {
+  color: var(--gold-primary);
+}
+
+/* ── Step indicator ─────────────────────────────────────────── */
+.steps-indicator {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 0;
+  margin-bottom: 32px;
+}
+
+.step-dot {
+  width: 32px;
+  height: 32px;
+  border-radius: 50%;
+  border: 2px solid var(--dark-border);
+  background: var(--dark-surface);
+  color: var(--text-muted);
+  font-size: 0.8rem;
+  font-weight: 700;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transition: var(--transition);
+  position: relative;
+  z-index: 1;
+}
+
+.step-dot.active {
+  border-color: var(--gold-primary);
+  background: var(--gold-dim);
+  color: var(--gold-primary);
+}
+
+.step-dot.done {
+  border-color: var(--accent-green);
+  background: rgba(16,185,129,0.15);
+  color: var(--accent-green);
+}
+
+.step-line {
+  height: 2px;
+  width: 60px;
+  background: var(--dark-border);
+  flex-shrink: 0;
+}
+
+.step-line.done {
+  background: var(--gold-dark);
+}
+
+/* ── Form enhancements for auth ─────────────────────────────── */
+.auth-card .form-control {
+  background: rgba(22, 22, 40, 0.8);
+  border-color: rgba(255,255,255,0.08);
+}
+
+.auth-card .form-control:focus {
+  background: rgba(28, 28, 48, 0.9);
+}
+
+.input-icon-wrap {
+  position: relative;
+}
+
+.input-icon-wrap .input-icon {
+  position: absolute;
+  left: 14px;
+  top: 50%;
+  transform: translateY(-50%);
+  color: var(--text-muted);
+  font-size: 1.1rem;
+  pointer-events: none;
+}
+
+.input-icon-wrap .form-control {
+  padding-left: 44px;
+}
+
+.input-icon-wrap .show-password {
+  position: absolute;
+  right: 14px;
+  top: 50%;
+  transform: translateY(-50%);
+  background: none;
+  border: none;
+  color: var(--text-muted);
+  cursor: pointer;
+  font-size: 1rem;
+  padding: 4px;
+  transition: color 0.2s;
+}
+.input-icon-wrap .show-password:hover { color: var(--text-secondary); }
+
+/* ── Remember me / Links ────────────────────────────────────── */
+.auth-meta {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  margin-bottom: 24px;
+  font-size: 0.85rem;
+}
+
+.auth-meta .remember {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  color: var(--text-muted);
+  cursor: pointer;
+}
+
+.auth-meta .remember input {
+  accent-color: var(--gold-primary);
+}
+
+.auth-link {
+  color: var(--gold-primary);
+  font-weight: 600;
+  transition: color 0.2s;
+  text-decoration: none;
+}
+.auth-link:hover { color: var(--gold-light); text-decoration: underline; }
+
+.auth-footer {
+  text-align: center;
+  margin-top: 24px;
+  font-size: 0.875rem;
+  color: var(--text-muted);
+}
+
+/* ── Demo credentials card ──────────────────────────────────── */
+.demo-card {
+  margin-top: 24px;
+  padding: 16px 20px;
+  background: rgba(245,200,66,0.05);
+  border: 1px dashed rgba(245,200,66,0.25);
+  border-radius: var(--radius-md);
+  font-size: 0.82rem;
+}
+
+.demo-card .demo-title {
+  font-weight: 700;
+  color: var(--gold-primary);
+  margin-bottom: 10px;
+  font-size: 0.78rem;
+  text-transform: uppercase;
+  letter-spacing: 0.06em;
+}
+
+.demo-row {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  padding: 4px 0;
+  color: var(--text-muted);
+}
+
+.demo-row strong { color: var(--text-secondary); font-weight: 600; }
+.demo-row .demo-badge {
+  padding: 2px 8px;
+  border-radius: 20px;
+  font-size: 0.7rem;
+  font-weight: 700;
+}
+
+.demo-btn {
+  background: none;
+  border: none;
+  color: var(--gold-primary);
+  font-size: 0.78rem;
+  cursor: pointer;
+  margin-left: auto;
+  padding: 2px 6px;
+  border-radius: 4px;
+  transition: background 0.2s;
+}
+.demo-btn:hover { background: var(--gold-dim); }
+
+/* ── Divider ────────────────────────────────────────────────── */
+.auth-divider {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  margin: 20px 0;
+}
+.auth-divider::before,
+.auth-divider::after {
+  content: '';
+  flex: 1;
+  height: 1px;
+  background: var(--dark-divider);
+}
+.auth-divider span {
+  font-size: 0.78rem;
+  color: var(--text-muted);
+  white-space: nowrap;
+}
+
+/* ── Step form panels ───────────────────────────────────────── */
+.form-step {
+  display: none;
+}
+.form-step.active {
+  display: block;
+  animation: fadeIn 0.35s ease;
+}
+
+/* ── Register page extra fields ─────────────────────────────── */
+.role-extra-fields {
+  display: none;
+}
+.role-extra-fields.active {
+  display: block;
+  animation: slideDown 0.3s ease;
+}
+
+/* ── Password strength ──────────────────────────────────────── */
+.password-strength {
+  margin-top: 8px;
+  display: flex;
+  gap: 4px;
+}
+.strength-bar {
+  height: 3px;
+  flex: 1;
+  border-radius: 2px;
+  background: var(--dark-surface);
+  transition: background 0.3s;
+}
+.strength-bar.weak   { background: var(--accent-red); }
+.strength-bar.medium { background: var(--accent-orange); }
+.strength-bar.strong { background: var(--accent-green); }
+
+/* ── Responsive ─────────────────────────────────────────────── */
+@media (max-width: 520px) {
+  .auth-card { padding: 28px 20px; }
+  .role-selector { grid-template-columns: 1fr; }
+  .auth-logo .logo-mark { width: 52px; height: 52px; font-size: 1.4rem; }
+  .auth-logo .logo-name { font-size: 1.6rem; }
+}
