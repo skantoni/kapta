@@ -2,6 +2,7 @@
 -- KAPTA — Schema da Base de Dados
 -- setup/database.sql
 -- ============================================================
+-- 445 451 750 8
 
 SET NAMES utf8mb4;
 SET FOREIGN_KEY_CHECKS = 0;
