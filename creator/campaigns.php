@@ -164,5 +164,5 @@ include '../includes/header.php';
     </main>
 </div>
 
-<script src="../assets/js/dashboard.js"></script>
+
 <?php include '../includes/footer.php'; ?>

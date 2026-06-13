@@ -8,11 +8,11 @@ SET FOREIGN_KEY_CHECKS = 0;
 SET SQL_MODE = 'NO_AUTO_VALUE_ON_ZERO';
 
 -- Base de dados
-CREATE DATABASE IF NOT EXISTS `kapta_db`
+CREATE DATABASE IF NOT EXISTS ` icei_41429853_kapta`
   CHARACTER SET utf8mb4
   COLLATE utf8mb4_unicode_ci;
 
-USE `kapta_db`;
+USE `icei_41429853_kapta`;
 
 -- -----------------------------------------------
 -- Tabela: users
@@ -167,19 +167,19 @@ CREATE TABLE `transactions` (
 -- Admin: admin@kapta.ao / admin123
 INSERT INTO `users` (`id`,`name`,`email`,`password`,`role`,`status`) VALUES
 (1, 'Administrador Kapta', 'admin@kapta.ao',
- '$2y$12$92IXUNpkjO0rOQ5byMi.Ye4oKoEa3Ro9llC/.og/at2.uheWG/igi', -- admin123
+ '$2y$10$oKV4Gd5DulpPeokIzen.mumYywm0dAA5JS6YLqKren0NUDL5dkq8C', -- admin123
  'admin', 'active');
 
 -- Brand: marca@demo.ao / demo123
 INSERT INTO `users` (`id`,`name`,`email`,`password`,`role`,`status`) VALUES
 (2, 'Demo Marca', 'marca@demo.ao',
- '$2y$12$TefkRqMZ.K5GXt1GaGSzEe.WcQYxlMC/k2G.u1E7q.oLbgfUh/zKm', -- demo123
+ '$2y$10$GgcpPQyOqp40CfdAf.PZg.IDFa09y/BnLYTHsIIYgwYviXW4XZ7sG', -- demo123
  'brand', 'active');
 
 -- Creator: creator@demo.ao / demo123
 INSERT INTO `users` (`id`,`name`,`email`,`password`,`role`,`status`) VALUES
 (3, 'João Creator', 'creator@demo.ao',
- '$2y$12$TefkRqMZ.K5GXt1GaGSzEe.WcQYxlMC/k2G.u1E7q.oLbgfUh/zKm', -- demo123
+ '$2y$10$GgcpPQyOqp40CfdAf.PZg.IDFa09y/BnLYTHsIIYgwYviXW4XZ7sG', -- demo123
  'creator', 'active');
 
 -- Brand profile

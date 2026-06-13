@@ -17,9 +17,9 @@ $balance = $wallet['balance'] ?? 0;
 $error = '';
 
 if ($_SERVER['REQUEST_METHOD'] === 'POST') {
-    $title = filter_input(INPUT_POST, 'title', FILTER_SANITIZE_STRING);
-    $description = filter_input(INPUT_POST, 'description', FILTER_SANITIZE_STRING);
-    $category = filter_input(INPUT_POST, 'category', FILTER_SANITIZE_STRING);
+    $title = isset($_POST['title']) ? htmlspecialchars(strip_tags($_POST['title'])) : '';
+    $description = isset($_POST['description']) ? htmlspecialchars(strip_tags($_POST['description'])) : '';
+    $category = isset($_POST['category']) ? htmlspecialchars(strip_tags($_POST['category'])) : '';
     $cpm_rate = filter_input(INPUT_POST, 'cpm_rate', FILTER_VALIDATE_FLOAT);
     $budget = filter_input(INPUT_POST, 'budget', FILTER_VALIDATE_FLOAT);
     $min_followers = filter_input(INPUT_POST, 'min_followers', FILTER_VALIDATE_INT) ?: 0;
@@ -255,5 +255,5 @@ include '../includes/header.php';
     </main>
 </div>
 
-<script src="../assets/js/dashboard.js"></script>
+
 <?php include '../includes/footer.php'; ?>

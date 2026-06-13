@@ -256,5 +256,5 @@ document.addEventListener('DOMContentLoaded', function() {
 });
 </script>
 
-<script src="../assets/js/dashboard.js"></script>
+
 <?php include '../includes/footer.php'; ?>

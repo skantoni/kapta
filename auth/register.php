@@ -6,6 +6,10 @@ session_name(SESSION_NAME);
 session_start();
 
 if (is_logged_in()) {
+    $user = current_user();
+    if ($user['role'] === 'brand') redirect(APP_URL . '/brand/dashboard.php');
+    if ($user['role'] === 'creator') redirect(APP_URL . '/creator/dashboard.php');
+    if ($user['role'] === 'admin') redirect(APP_URL . '/admin/dashboard.php');
     redirect(APP_URL);
 }
 
@@ -15,7 +19,7 @@ $role = isset($_GET['role']) && in_array($_GET['role'], ['brand', 'creator']) ? 
 
 if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     $role = $_POST['role'] ?? '';
-    $name = filter_input(INPUT_POST, 'name', FILTER_SANITIZE_STRING);
+    $name = isset($_POST['name']) ? htmlspecialchars(strip_tags($_POST['name'])) : '';
     $email = filter_input(INPUT_POST, 'email', FILTER_SANITIZE_EMAIL);
     $password = $_POST['password'] ?? '';
     $password_confirm = $_POST['password_confirm'] ?? '';
@@ -44,12 +48,12 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
                 
                 // Insert Profile
                 if ($role === 'brand') {
-                    $company = filter_input(INPUT_POST, 'company_name', FILTER_SANITIZE_STRING);
+                    $company = isset($_POST['company_name']) ? htmlspecialchars(strip_tags($_POST['company_name'])) : '';
                     $stmt = $pdo->prepare("INSERT INTO brand_profiles (user_id, company_name) VALUES (?, ?)");
                     $stmt->execute([$user_id, $company ?: $name]);
                 } else {
-                    $tiktok = filter_input(INPUT_POST, 'tiktok_handle', FILTER_SANITIZE_STRING);
-                    $youtube = filter_input(INPUT_POST, 'youtube_channel', FILTER_SANITIZE_STRING);
+                    $tiktok = isset($_POST['tiktok_handle']) ? htmlspecialchars(strip_tags($_POST['tiktok_handle'])) : '';
+                    $youtube = isset($_POST['youtube_channel']) ? htmlspecialchars(strip_tags($_POST['youtube_channel'])) : '';
                     $stmt = $pdo->prepare("INSERT INTO creator_profiles (user_id, tiktok_handle, youtube_channel) VALUES (?, ?, ?)");
                     $stmt->execute([$user_id, $tiktok, $youtube]);
                 }
@@ -61,10 +65,12 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
                 $pdo->commit();
                 
                 // Auto login
-                $_SESSION['user_id'] = $user_id;
-                $_SESSION['user_name'] = $name;
-                $_SESSION['user_email'] = $email;
-                $_SESSION['user_role'] = $role;
+                $_SESSION['kapta_user'] = [
+                    'id' => $user_id,
+                    'name' => $name,
+                    'email' => $email,
+                    'role' => $role
+                ];
                 
                 flash('Conta criada com sucesso! Bem-vindo à Kapta.', 'success');
                 

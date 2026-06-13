@@ -413,12 +413,18 @@ include 'includes/header.php';
         </p>
         
         <div class="hero-actions animate-on-scroll" style="animation-delay: 0.4s;">
-            <a href="auth/register.php?role=brand" class="btn btn-primary" style="padding: 16px 32px; font-size: 1.1rem; box-shadow: 0 0 30px rgba(245,200,66,0.3);">
-                Sou uma Marca <i class="ph ph-arrow-right"></i>
-            </a>
-            <a href="auth/register.php?role=creator" class="btn btn-secondary" style="padding: 16px 32px; font-size: 1.1rem; background: rgba(255,255,255,0.05);">
-                Sou um Creator <i class="ph ph-arrow-right"></i>
-            </a>
+            <?php if (is_logged_in()): ?>
+                <a href="<?php echo current_user()['role']; ?>/dashboard.php" class="btn btn-primary" style="padding: 16px 32px; font-size: 1.1rem; box-shadow: 0 0 30px rgba(245,200,66,0.3);">
+                    Ir para a Dashboard <i class="ph ph-arrow-right"></i>
+                </a>
+            <?php else: ?>
+                <a href="auth/register.php?role=brand" class="btn btn-primary" style="padding: 16px 32px; font-size: 1.1rem; box-shadow: 0 0 30px rgba(245,200,66,0.3);">
+                    Sou uma Marca <i class="ph ph-arrow-right"></i>
+                </a>
+                <a href="auth/register.php?role=creator" class="btn btn-secondary" style="padding: 16px 32px; font-size: 1.1rem; background: rgba(255,255,255,0.05);">
+                    Sou um Creator <i class="ph ph-arrow-right"></i>
+                </a>
+            <?php endif; ?>
         </div>
     </div>
 </section>

@@ -34,8 +34,6 @@ include '../includes/header.php';
 ?>
 
 <div class="dashboard-layout">
-    <?php include 'sidebar.php'; // I'll inline the sidebar logic here for simplicity but ideally it's an include ?>
-    
     <aside class="sidebar" id="sidebar">
         <div class="sidebar-header">
             <a href="dashboard.php" class="logo gradient-text">Kapta.</a>
